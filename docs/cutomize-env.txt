@@ -1,0 +1,65 @@
+###################### Customize The Environment #######################
+
+
+Intro
+-----
+* Incorrect or inconvenient environmental settings can also make life miserable for the Unix programmer. Unix system is controlled by a number if shell variables that are seperatly set by the system at the boot time sequence and some after logging in.
+
+Common Variables
+----------------
+1) PATH: The PATH variable instructs the shell about the route it should follow to locate any executable command. If you wish to include the directory in your search list, then you'll have to reassign this variable. If tehre are two commands having the same name in two different directories, that command will be executed whose directory name appears first in the PATH list.
+
+2) HOME: When you log in unix normally place you in a dir named after your login name. This dir is called the home or login dir. And it is available in the HOME variable. You can change this home dir by changing the file /etc/passwd (only sys admin(root user) have access to it).
+
+3) PS1 & PS2 : The shell has two prompts stored in PS1 and PS2. The primary prompt PS1 and the secondary prompt (>) which you also seen when you use echo command.
+
+4) SHELL: SHELL tells you the shell you are using. There are some programs like vi more etc. that provides you with a shell escape to let you run a UNIX command. 
+
+5) TERM: Terminal Type
+	Every terminal has certain characteristics that are defined in a seperate control file in the terminfo directory /usr/lib/ or /usr/share/lib. This dir contains certain sub dirsnamed after the first letter ofthe alphabet.
+
+6) LOGNAME : This variable shows your username. ===> equivalent to whoami.
+
+
+IFS
+---
+Field seperator for command line (IFS). IFS contains a string of characters that are used as word seperators in a command line. The string normally contains the \t \s \n . All these chars are invisible you can check this by 
+	echo $IFS | od -bc
+
+
+
+Variables used in Bash and Korn
+-------------------------------
+bash and korn allows you to use aliases that let you assign shorthand names for frequently used commands.
+
+Many people aliases ls command to always execute ls -xF. Aliases is done with alias statement and aliasis defined in the same way as variable.
+
+	alias ls='ls -xF --color=auto'
+To use the original command (to override the alias) just preceed he command with \
+
+Lets briefly examine the other features of aliases. An alias is recursive, which means that if a is aliased to b and b is aliased to c, a should run c.
+* Listing all aliases by typing alias without arguments.
+* Unset an alias with the unalias statement.
+	eg: unaliawith s cp
+
+
+Command History (Bash, Ksh)
+---------------------------
+Bash and Korn support a versatile history feature. That allow us to recall the command that already executed. The shell assigns each command an event number and may save all command in the history file.
+The history command displays the history list showing the event number of every previously executed command. A command can be recall using the symbol !  or r. The max size and name of this file are determined by two shell specific variables.
+
+	last 5 command can be seen by
+		history 5
+
+By default bash stores all commands in the $HOME/.bash_history file. When a command is entered it is appended to the list.
+
+
+Accessing Previous Command By Event Numbers (! and r)
+-----------------------------------------------------
+	* repeat previous command             !!
+	* with the event number               !2005
+	* display command without executing   !3056:p
+
+Executing Previous Command By Context
+-------------------------------------
+	* If you know the last command is begin with letter v then you can execute the command by tyoing !v
